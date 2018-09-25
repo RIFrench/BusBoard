@@ -10,8 +10,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 public class TransportClient {
-	private static final String APP_ID = "YOUR APP ID";
-	private static final String APP_KEY = "YOUR APP KEY";
+	private static final String APP_ID = "034b08e6";
+	private static final String APP_KEY = "4510ea12c21fb294a20fb777357cc33e";
     private static final String API_URL = "http://transportapi.com";
 
     private Client client = ClientBuilder.newBuilder().register(JacksonFeature.class).build();
