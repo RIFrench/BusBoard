@@ -39,5 +39,7 @@ public class TwoTransportTwoClient {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class BusStop {
     	public String atcocode;
+    	public String name;
+    	public String distance;
     }
 }

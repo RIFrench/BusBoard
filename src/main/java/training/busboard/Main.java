@@ -23,12 +23,12 @@ public class Main {
 //        return new Scanner(System.in).nextLine();
 //    }
 //
-//    private static String formatPrediction(ArrivalPrediction prediction) {
-//        return String.format("%s to %s will leave at: %s",
-//                prediction.getLineName(),
-//                prediction.getDirection(),
-//                prediction.getBestDepartureEstimate());
-//    }
+    private static String formatPrediction(ArrivalPrediction prediction) {
+        return String.format("%s to %s will leave at: %s",
+        		prediction.getLineName(),
+                prediction.getDirection(),
+                prediction.getBestDepartureEstimate());
+    }
 	
     public static void main(String args[]) {
         String postcode = promptForPostcode();
@@ -40,8 +40,11 @@ public class Main {
         String longitude = "" + coordinates.getLongitude();
         
         List<BusStop> nearbyBusStops = new TwoTransportTwoClient().getBusStops(latitude, longitude);
-        nearbyBusStops.stream().forEach(busStop ->
-                   System.out.println(busStop.atcocode));
+        nearbyBusStops.stream().forEach(busStop -> {
+        	List<ArrivalPrediction> arrivals = new TransportClient().getArrivalPredictions(busStop.atcocode);
+        	arrivals.stream().sorted(Comparator.comparing(ArrivalPrediction::getBestDepartureEstimate)).limit(1).forEach(prediction ->
+            System.out.println(busStop.name + " is " + busStop.distance + "m away\n" + formatPrediction(prediction)));
+        });        
     }
 
     private static String promptForPostcode() {
